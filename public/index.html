@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React</title>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/babel">
+      class TimeCounter extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            counter: 0
+          };
+          this.timer = this.timer.bind(this);
+        }
+
+        componentDidMount() {
+          setInterval(this.timer, 1000);
+        }
+
+        timer() {
+          this.setState({
+            counter: this.state.counter + 1
+          });
+        }
+
+        render() {
+          return (
+            <div>
+              <p>Количество секунд с момента запуска:</p>
+              <h1>{this.state.counter}</h1>
+            </div>
+          );
+        }
+      }
+      class DisplayCounter extends React.Component {
+        render() {
+          var style = {
+            width: "300px",
+            textAlign: "center",
+            backgroundColor: "#777777",
+            padding: "20px",
+            fontFamily: "sans-serif",
+            color: "#FFFFFF",
+            borderRadius: "10px"
+          };
+          return (
+            <div style={style}>
+              <TimeCounter />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<DisplayCounter />, document.querySelector("#container"));
+    </script>
+  </body>
+</html>
